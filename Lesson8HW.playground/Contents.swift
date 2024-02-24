@@ -95,7 +95,6 @@
 //            }
 //        }
 //    }
-//    arrayFinal.count
 //    arrayFinal.forEach({ print($0.name) })
 //}
 //
@@ -119,30 +118,212 @@
 
 //Task3
 
+//class Human {
+//    var weaponDamage: Int
+//    var health: Int
+//    var armor: Int
+//    var evasion: Bool
+//
+//    init(weaponDamage: Int = 4, health: Int = 9, armor: Int = 5, evasion: Bool = false) {
+//        self.weaponDamage = weaponDamage
+//        self.health = health
+//        self.armor = armor
+//        self.evasion = evasion
+//    }
+//
+//    func attack(_ opponent: Human) {
+//        if opponent.evasion == false {
+//            if opponent.armor > 0 {
+//                opponent.armor -= weaponDamage
+//            } else {
+//                opponent.health -= weaponDamage
+//            }
+//        } else {
+//            opponent.evasion = false
+//        }
+//    }
+//}
+//
+//class Ork: Human {
+//    override init(weaponDamage: Int, health: Int, armor: Int, evasion: Bool) {
+//        super.init(weaponDamage: 3, health: 10, armor: 10, evasion: false)
+//    }
+//
+//    override func attack(_ opponent: Human) {
+//        if opponent.evasion == false {
+//            if opponent.armor > 0 {
+//                opponent.armor -= weaponDamage
+//            } else {
+//                opponent.health -= weaponDamage
+//            }
+//        } else {
+//            opponent.evasion = false
+//        }
+//    }
+//}
+//
+//class Elf: Human {
+//    override init(weaponDamage: Int, health: Int, armor: Int, evasion: Bool) {
+//        super.init(weaponDamage: 6, health: 8, armor: 0, evasion: true)
+//    }
+//
+//    override func attack(_ opponent: Human) {
+//        if opponent.evasion == false {
+//            if opponent.armor > 0 {
+//                opponent.armor -= weaponDamage
+//            } else {
+//                opponent.health -= weaponDamage
+//            }
+//        }
+//    }
+//}
+//
+//
+//var human = Human(weaponDamage: 4, health: 9, armor: 5, evasion: false)
+//var ork = Ork(weaponDamage: 3, health: 10, armor: 10, evasion: false)
+//var elf = Elf(weaponDamage: 6, health: 8, armor: 0, evasion: true)
+//
+//print("Турнир начинается!!! ")
+//print("Боец справа - Человек: Атака - \(human.weaponDamage), Здоровье - \(human.health), Защита - \(human.armor), Уклонение - \(human.evasion) ")
+//print("Боец слева - Орк: Атака - \(ork.weaponDamage), Здоровье - \(ork.health), Защита - \(ork.armor), Уклонение - \(ork.evasion) ")
+//human.attack(ork)
+//print("Человек атакует орка - Орк: Здоровье - \(ork.health), Защита - \(ork.armor)")
+//ork.attack(human)
+//print("Орк атакует человека - Человек: Здоровье - \(human.health), Защита - \(human.armor)")
+//human.attack(ork)
+//print("Человек атакует орка - Орк: Здоровье - \(ork.health), Защита - \(ork.armor)")
+//ork.attack(human)
+//print("Орк атакует человека - Человек: Здоровье - \(human.health), Защита - \(human.armor)")
+//human.attack(ork)
+//print("Человек атакует орка - Орк: Здоровье - \(ork.health), Защита - \(ork.armor)")
+//ork.attack(human)
+//print("Орк атакует человека - Человек: Здоровье - \(human.health), Защита - \(human.armor)")
+//human.attack(ork)
+//print("Человек атакует орка - Орк: Здоровье - \(ork.health), Защита - \(ork.armor)")
+//ork.attack(human)
+//print("Орк атакует человека - Человек: Здоровье - \(human.health), Защита - \(human.armor)")
+//human.attack(ork)
+//print("Человек атакует орка - Орк: Здоровье - \(ork.health), Защита - \(ork.armor)")
+//ork.attack(human)
+//print("Орк атакует человека - Человек: Здоровье - \(human.health), Защита - \(human.armor)")
+//print("Орк победил!!!")
+
+
 class Human {
-    var weaponDamage: Int = 4
-    var health: Int = 9
-    var armor: Int = 5
-    var evasion: Int = 0
+    var name: String
+    var weaponDamage: Int
+    var health: Int
+    var armor: Int
+    var evasion: Bool
     
-    init(weaponDamage: Int, health: Int, armor: Int, evasion: Int) {
-        self.weaponDamage = weaponDamage // урон
-        self.health = health // здоровье
-        self.armor = armor // защита
-        self.evasion = evasion // уклонение
+    init(name: String = "Человек", weaponDamage: Int = 4, health: Int = 9, armor: Int = 5, evasion: Bool = false) {
+        self.name = name
+        self.weaponDamage = weaponDamage
+        self.health = health
+        self.armor = armor
+        self.evasion = evasion
     }
     
-    func attack() { //
-        if health >= 1 {
-            
+    func attack(_ opponent: Human) {
+        if opponent.health > 0 {
+            if opponent.evasion == true {
+                opponent.evasion = false
+            }
+            if opponent.evasion == false {
+                if opponent.armor > 0 {
+                    opponent.armor -= weaponDamage
+                } else {
+                    opponent.health -= weaponDamage
+                }
+            }
         }
     }
 }
 
 class Ork: Human {
-    
+    override init(name: String, weaponDamage: Int, health: Int, armor: Int, evasion: Bool) {
+        super.init(name: "Ork", weaponDamage: 3, health: 10, armor: 10, evasion: false)
+    }
+
+    override func attack(_ opponent: Human) {
+        if opponent.health > 0 {
+            if opponent.evasion == true {
+                opponent.evasion = false
+            }
+            if opponent.evasion == false {
+                if opponent.armor > 0 {
+                    opponent.armor -= weaponDamage
+                } else {
+                    opponent.health -= weaponDamage
+                }
+            }
+        }
+    }
 }
 
-class Elf {
-    
+class Elf: Human {
+    override init(name: String, weaponDamage: Int, health: Int, armor: Int, evasion: Bool) {
+        super.init(name: "Elf", weaponDamage: 6, health: 8, armor: 0, evasion: true)
+    }
+
+    override func attack(_ opponent: Human) {
+        if opponent.health > 0 {
+            if opponent.evasion == true {
+                opponent.evasion = false
+            }
+            if opponent.evasion == false {
+                if opponent.armor > 0 {
+                    opponent.armor -= weaponDamage
+                } else {
+                    opponent.health -= weaponDamage
+                }
+            }
+        }
+    }
 }
+
+func tournament(fighterOne: Human, fighterTwo: Human) {
+    while fighterOne.health > 0 && fighterTwo.health > 0 {
+        fighterOne.attack(fighterTwo)
+        fighterTwo.attack(fighterOne)
+    }
+
+    if fighterOne.health > 0 {
+        print("Победил \(fighterOne.name)")
+    } else {
+        print("Победил \(fighterTwo.name)")
+    }
+}
+
+var human = Human(name: "Человек", weaponDamage: 4, health: 9, armor: 5, evasion: false)
+var ork = Ork(name: "Орк", weaponDamage: 3, health: 10, armor: 10, evasion: false)
+var elf = Elf(name: "Ельф", weaponDamage: 6, health: 8, armor: 0, evasion: true)
+
+// tournament humanVSork
+
+print("Турнир начинается!!! ")
+print("Боец справа - Человек: Атака - \(human.weaponDamage), Здоровье - \(human.health), Защита - \(human.armor), Уклонение - \(human.evasion) ")
+print("Боец слева - Орк: Атака - \(ork.weaponDamage), Здоровье - \(ork.health), Защита - \(ork.armor), Уклонение - \(ork.evasion) ")
+
+
+tournament(fighterOne: human, fighterTwo: ork)
+
+// tournament humanVSElf
+
+print("Турнир начинается!!! ")
+print("Боец справа - Человек: Атака - \(human.weaponDamage), Здоровье - \(human.health), Защита - \(human.armor), Уклонение - \(human.evasion) ")
+print("Боец слева - Ельф: Атака - \(elf.weaponDamage), Здоровье - \(elf.health), Защита - \(elf.armor), Уклонение - \(elf.evasion) ")
+
+
+tournament(fighterOne: human, fighterTwo: elf)
+
+// tournament orkVSElf
+
+print("Турнир начинается!!! ")
+print("Боец справа - Орк: Атака - \(ork.weaponDamage), Здоровье - \(ork.health), Защита - \(ork.armor), Уклонение - \(ork.evasion) ")
+print("Боец слева - Ельф: Атака - \(elf.weaponDamage), Здоровье - \(elf.health), Защита - \(elf.armor), Уклонение - \(elf.evasion) ")
+
+
+tournament(fighterOne: ork, fighterTwo: elf)
+
+print("Абсолютный чемпион - \(elf.name)")
