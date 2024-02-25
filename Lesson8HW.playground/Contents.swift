@@ -209,6 +209,8 @@
 //print("Орк победил!!!")
 
 
+//Task3Ver2Final
+
 class Human {
     var name: String
     var weaponDamage: Int
@@ -226,15 +228,16 @@ class Human {
     
     func attack(_ opponent: Human) {
         if opponent.health > 0 {
-            if opponent.evasion == true {
-                opponent.evasion = false
-            }
             if opponent.evasion == false {
                 if opponent.armor > 0 {
                     opponent.armor -= weaponDamage
                 } else {
+                    opponent.health += opponent.armor // поправка по урону на отрицательное значение защиты после аттаки
+                    opponent.armor = 0 // для красоты отображение
                     opponent.health -= weaponDamage
                 }
+            } else {
+                opponent.evasion = false
             }
         }
     }
@@ -247,15 +250,16 @@ class Ork: Human {
 
     override func attack(_ opponent: Human) {
         if opponent.health > 0 {
-            if opponent.evasion == true {
-                opponent.evasion = false
-            }
             if opponent.evasion == false {
                 if opponent.armor > 0 {
                     opponent.armor -= weaponDamage
                 } else {
+                    opponent.health += opponent.armor
+                    opponent.armor = 0
                     opponent.health -= weaponDamage
                 }
+            } else {
+                opponent.evasion = false
             }
         }
     }
@@ -268,30 +272,39 @@ class Elf: Human {
 
     override func attack(_ opponent: Human) {
         if opponent.health > 0 {
-            if opponent.evasion == true {
-                opponent.evasion = false
-            }
             if opponent.evasion == false {
                 if opponent.armor > 0 {
                     opponent.armor -= weaponDamage
                 } else {
+                    opponent.health += opponent.armor
+                    opponent.armor = 0
                     opponent.health -= weaponDamage
                 }
+            } else {
+                opponent.evasion = false
             }
         }
     }
 }
 
 func tournament(fighterOne: Human, fighterTwo: Human) {
-    while fighterOne.health > 0 && fighterTwo.health > 0 {
+    while fighterOne.health >= 0 && fighterTwo.health >= 0 {
+        print("\(fighterOne.name) аттакует \(fighterTwo.name)")
         fighterOne.attack(fighterTwo)
+        print("Боец \(fighterTwo.name): Здоровье - \(fighterTwo.health), Защита - \(fighterTwo.armor), Уклонение - \(fighterTwo.evasion)")
+        
+        if fighterTwo.health <= 0 {
+            print("Победил \(fighterOne.name)")
+            break
+        }
+        print("\(fighterTwo.name) аттакует \(fighterOne.name)")
         fighterTwo.attack(fighterOne)
-    }
-
-    if fighterOne.health > 0 {
-        print("Победил \(fighterOne.name)")
-    } else {
-        print("Победил \(fighterTwo.name)")
+        print("Боец \(fighterOne.name): Здоровье - \(fighterOne.health), Защита - \(fighterOne.armor), Уклонение - \(fighterOne.evasion)")
+        
+        if fighterOne.health <= 0 {
+            print("Победил \(fighterTwo.name)")
+            break
+        }
     }
 }
 
@@ -310,20 +323,18 @@ tournament(fighterOne: human, fighterTwo: ork)
 
 // tournament humanVSElf
 
-print("Турнир начинается!!! ")
-print("Боец справа - Человек: Атака - \(human.weaponDamage), Здоровье - \(human.health), Защита - \(human.armor), Уклонение - \(human.evasion) ")
-print("Боец слева - Ельф: Атака - \(elf.weaponDamage), Здоровье - \(elf.health), Защита - \(elf.armor), Уклонение - \(elf.evasion) ")
-
-
-tournament(fighterOne: human, fighterTwo: elf)
+//print("Турнир начинается!!! ")
+//print("Боец справа - Человек: Атака - \(human.weaponDamage), Здоровье - \(human.health), Защита - \(human.armor), Уклонение - \(human.evasion) ")
+//print("Боец слева - Ельф: Атака - \(elf.weaponDamage), Здоровье - \(elf.health), Защита - \(elf.armor), Уклонение - \(elf.evasion) ")
+//
+//
+//tournament(fighterOne: human, fighterTwo: elf)
 
 // tournament orkVSElf
 
-print("Турнир начинается!!! ")
-print("Боец справа - Орк: Атака - \(ork.weaponDamage), Здоровье - \(ork.health), Защита - \(ork.armor), Уклонение - \(ork.evasion) ")
-print("Боец слева - Ельф: Атака - \(elf.weaponDamage), Здоровье - \(elf.health), Защита - \(elf.armor), Уклонение - \(elf.evasion) ")
-
-
-tournament(fighterOne: ork, fighterTwo: elf)
-
-print("Абсолютный чемпион - \(elf.name)")
+//print("Турнир начинается!!! ")
+//print("Боец справа - Орк: Атака - \(ork.weaponDamage), Здоровье - \(ork.health), Защита - \(ork.armor), Уклонение - \(ork.evasion) ")
+//print("Боец слева - Ельф: Атака - \(elf.weaponDamage), Здоровье - \(elf.health), Защита - \(elf.armor), Уклонение - \(elf.evasion) ")
+//
+//
+//tournament(fighterOne: ork, fighterTwo: elf)
