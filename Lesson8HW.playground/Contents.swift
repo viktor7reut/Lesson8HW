@@ -290,15 +290,20 @@ class Elf: Human {
 func tournament(fighterOne: Human, fighterTwo: Human) {
     while fighterOne.health >= 0 && fighterTwo.health >= 0 {
         print("\(fighterOne.name) аттакует \(fighterTwo.name)")
+        
         fighterOne.attack(fighterTwo)
+        
         print("Боец \(fighterTwo.name): Здоровье - \(fighterTwo.health), Защита - \(fighterTwo.armor), Уклонение - \(fighterTwo.evasion)")
         
         if fighterTwo.health <= 0 {
             print("Победил \(fighterOne.name)")
             break
         }
+        
         print("\(fighterTwo.name) аттакует \(fighterOne.name)")
+        
         fighterTwo.attack(fighterOne)
+        
         print("Боец \(fighterOne.name): Здоровье - \(fighterOne.health), Защита - \(fighterOne.armor), Уклонение - \(fighterOne.evasion)")
         
         if fighterOne.health <= 0 {
